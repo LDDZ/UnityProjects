@@ -14,7 +14,9 @@ public class SnakeHead : MonoBehaviour
     private int y;
     private Vector3 headPos;
 	private Transform canvas;
+    private bool isDie=false;
 
+    public GameObject dieEffect;
 	public GameObject bodyPrefab;
 	public Sprite[] bodySprites=new Sprite[2];
 
@@ -31,34 +33,34 @@ public class SnakeHead : MonoBehaviour
     void Update()
     {
         //按下空格加速
-        if (Input.GetKeyDown(KeyCode.Space) )
+        if (Input.GetKeyDown(KeyCode.Space)&&MainUIController.Instance.isPause==false &&isDie==false)
         {
             CancelInvoke();
             InvokeRepeating("Move", 0, velocity - 0.2f);
         }
-        if (Input.GetKeyUp(KeyCode.Space) )
+        if (Input.GetKeyUp(KeyCode.Space) &&MainUIController.Instance.isPause==false&&isDie==false)
         {
             CancelInvoke();
             InvokeRepeating("Move", 0, velocity);
         }
 
         //方向控制
-        if (Input.GetKey(KeyCode.W) && y != -step )
+        if (Input.GetKey(KeyCode.W) && y != -step &&MainUIController.Instance.isPause==false&&isDie==false)
         {
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
             x = 0;y = step;
         }
-        if (Input.GetKey(KeyCode.S) && y != step )
+        if (Input.GetKey(KeyCode.S) && y != step &&MainUIController.Instance.isPause==false&&isDie==false)
         {
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 180);
             x = 0; y = -step;
         }
-        if (Input.GetKey(KeyCode.A) && x != step )
+        if (Input.GetKey(KeyCode.A) && x != step &&MainUIController.Instance.isPause==false&&isDie==false)
         {
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, 90);
             x = -step; y = 0;
         }
-        if (Input.GetKey(KeyCode.D) && x != -step )
+        if (Input.GetKey(KeyCode.D) && x != -step &&MainUIController.Instance.isPause==false&&isDie==false)
         {
             gameObject.transform.localRotation = Quaternion.Euler(0, 0, -90);
             x = step; y = 0;
@@ -92,6 +94,22 @@ public class SnakeHead : MonoBehaviour
         body.transform.SetParent(canvas, false);
 		bodyList.Add(body.transform);
 	}
+    void Die(){
+        CancelInvoke();//取消此MonoBehaviour上的所有Invoke调用。
+        isDie=true;
+        Instantiate(dieEffect);
+        PlayerPrefs.SetInt("lastl",MainUIController.Instance.length);//设置key标识的首选项的值。
+        PlayerPrefs.SetInt("lasts",MainUIController.Instance.score);
+        if(PlayerPrefs.GetInt("bests",0)<MainUIController.Instance.score){
+            PlayerPrefs.SetInt("lastl",MainUIController.Instance.length);
+            PlayerPrefs.SetInt("lasts",MainUIController.Instance.score);
+        }
+        StartCoroutine(GameOver(1.5f));
+    }
+    IEnumerator GameOver(float t){
+        yield return new WaitForSeconds(t);//创建一个yield指令，使用缩放时间等待给定的秒数。
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag=="Food")
 		{
@@ -106,7 +124,7 @@ public class SnakeHead : MonoBehaviour
             Grow();//生成蛇身
         } else if(other.tag=="Body")
         {
-            Debug.Log("Die");
+            Die();
         }else
         {
             switch(other.gameObject.name){

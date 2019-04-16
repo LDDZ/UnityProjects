@@ -367,6 +367,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114814632792861026, guid: fc51a1d4ec4d1d942a40e3cdea3bd85d,
+        type: 2}
+      propertyPath: dieEffect
+      value: 
+      objectReference: {fileID: 1869509813425396, guid: 059a58b7031b96840ac6bb10f03ccfae,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc51a1d4ec4d1d942a40e3cdea3bd85d, type: 2}
   m_IsPrefabAsset: 0
@@ -1264,11 +1270,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a2bf1e9b90b2d46bdf2f24a8d10597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPause: 0
   score: 0
   length: 0
   msgText: {fileID: 462009907}
   scoreText: {fileID: 1049984974}
   lengthText: {fileID: 152001431}
+  pauseImage: {fileID: 306129590}
+  pauseSprites:
+  - {fileID: 21300000, guid: deb918b9b3aa2e24f969108ef9ce6e32, type: 3}
+  - {fileID: 21300000, guid: e4f0e9d913a79b54f9675dc89f2ab870, type: 3}
   bgImage: {fileID: 832629040}
 --- !u!1 &1620531124
 GameObject:
@@ -1481,7 +1492,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1836207274}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474196474}
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1836207274

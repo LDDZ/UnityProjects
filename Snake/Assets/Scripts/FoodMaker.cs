@@ -13,6 +13,7 @@ public class FoodMaker : MonoBehaviour {
 	public int ylimit=11;
 	public int xoffset=7;
 	public GameObject foodPrefab;
+	public GameObject rewardPrefab;
 	public Sprite[] foodSprites;
 	private Transform foodHolder;
 	
@@ -21,9 +22,9 @@ public class FoodMaker : MonoBehaviour {
 	}
 	private void Start() {
 		foodHolder=GameObject.Find("FoodHolder").transform;
-		MakeFood();
+		MakeFood(false);
 	}
-	public void MakeFood(){
+	public void MakeFood(bool isReward){
 		int index=Random.Range(0,foodSprites.Length);
 		GameObject food =Instantiate(foodPrefab);
 		food.transform.SetParent(foodHolder,false);
@@ -31,5 +32,12 @@ public class FoodMaker : MonoBehaviour {
 		int x=Random.Range(-xlimit+xoffset ,xlimit );
 		int y=Random .Range (-ylimit ,ylimit);
 		food.transform.localPosition =new Vector3(x*30,y*30,0);
+		if(isReward){
+		GameObject reward =Instantiate(rewardPrefab);
+		reward.transform.SetParent(foodHolder,false);
+		x=Random.Range(-xlimit+xoffset ,xlimit );
+		y=Random .Range (-ylimit ,ylimit);
+		reward.transform.localPosition =new Vector3(x*30,y*30,0);
+		}
 	}
 }

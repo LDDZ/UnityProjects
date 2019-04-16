@@ -87,8 +87,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0a1330fab42e841a8314adfa37c2da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyList: []
   velocity: 0.35
   step: 30
+  bodyPrefab: {fileID: 1162396597817248, guid: 5937416b76b9ba744ac8f34a77b0858f, type: 2}
+  bodySprites:
+  - {fileID: 21300000, guid: 453b92a9f25c44e44b990584cd298796, type: 3}
+  - {fileID: 21300000, guid: 0ce58dd12fa36cd45bcbee0408ea0eea, type: 3}
 --- !u!114 &114955062996188530
 MonoBehaviour:
   m_ObjectHideFlags: 1

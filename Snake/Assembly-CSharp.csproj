@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\FoodMaker.cs" />
+     <Compile Include="Assets\Scripts\MainUIController.cs" />
      <Compile Include="Assets\Scripts\SnakeHead.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>E:/UnityProjects/Snake/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

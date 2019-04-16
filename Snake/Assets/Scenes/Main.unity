@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 444174677}
   - component: {fileID: 444174676}
   m_Layer: 5
-  m_Name: up
+  m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u65E0\u5C3D\u6A21\u5F0F"
+  m_Text: "\u9636\u6BB51"
 --- !u!222 &462009908
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1204,6 +1204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1474196473}
   - component: {fileID: 1474196472}
+  - component: {fileID: 1474196474}
   m_Layer: 0
   m_Name: ScriptsHolder
   m_TagString: Untagged
@@ -1226,6 +1227,8 @@ MonoBehaviour:
   ylimit: 11
   xoffset: 7
   foodPrefab: {fileID: 1051989257122044, guid: 809753b5b49b4c04b8aa62029d67eac7, type: 2}
+  rewardPrefab: {fileID: 1048677621300824, guid: d85a32b50d6b7d44b9698728879a5d4a,
+    type: 2}
   foodSprites:
   - {fileID: 21300000, guid: 8adc7582d5999224ca185e0f2bd3630f, type: 3}
   - {fileID: 21300000, guid: a30bab4c2a053bb4294d833cbf4bde9d, type: 3}
@@ -1250,6 +1253,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1474196474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474196471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a2bf1e9b90b2d46bdf2f24a8d10597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  length: 0
+  msgText: {fileID: 462009907}
+  scoreText: {fileID: 1049984974}
+  lengthText: {fileID: 152001431}
+  bgImage: {fileID: 832629040}
 --- !u!1 &1620531124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,7 +1663,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -150, y: 0}
+  m_Offset: {x: -105, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

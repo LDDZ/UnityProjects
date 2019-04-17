@@ -9,6 +9,7 @@ public class MainUIController : MonoBehaviour {
 	public static MainUIController Instance{
 		get{return _instance;}
 	}
+	public bool hasBorder=true;
 	public  bool isPause=false;
 	public int score=0;
 	public int length=0;
@@ -22,6 +23,15 @@ public class MainUIController : MonoBehaviour {
 	
 	void Awake() {
 		_instance=this;
+	}
+	private void Start() {
+		if (PlayerPrefs.GetInt("border",1)==0)
+		{
+			hasBorder=false;
+			foreach(Transform t in bgImage.gameObject.transform){
+				t.gameObject.GetComponent<Image>().enabled=false;
+			}
+		}
 	}
 	private void Update() {
 		switch(score/100){

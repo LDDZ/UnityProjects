@@ -16,12 +16,18 @@ public class SnakeHead : MonoBehaviour
 	private Transform canvas;
     private bool isDie=false;
 
+    public AudioClip eatClip;
+    public AudioClip dieClip;
     public GameObject dieEffect;
 	public GameObject bodyPrefab;
 	public Sprite[] bodySprites=new Sprite[2];
 
     private void Awake() {
         canvas=GameObject.Find("Canvas").transform;
+        //通过Resources.Load(string path)方法加载资源,path的书写不需要交Resources/以及文件扩展名
+        gameObject.GetComponent<Image>().sprite=Resources.Load<Sprite>(PlayerPrefs.GetString("sh","sh02"));
+        bodySprites[0]=Resources.Load<Sprite>(PlayerPrefs.GetString("sb01","sb0201"));
+        bodySprites[1]=Resources.Load<Sprite>(PlayerPrefs.GetString("sb02","sb0202"));
     }
 
     void Start()
@@ -88,6 +94,7 @@ public class SnakeHead : MonoBehaviour
     }
 
 	void Grow(){
+        AudioSource.PlayClipAtPoint(eatClip,Vector3.zero);//播放吃食物音效
 		int index=(bodyList.Count%2==0)?0:1;
 		GameObject body=Instantiate(bodyPrefab,new Vector3(2000,2000,0),Quaternion.identity);
 		body.GetComponent<Image>().sprite=bodySprites[index];
@@ -95,14 +102,15 @@ public class SnakeHead : MonoBehaviour
 		bodyList.Add(body.transform);
 	}
     void Die(){
+        AudioSource.PlayClipAtPoint(dieClip,Vector3.zero);//播放死亡音效
         CancelInvoke();//取消此MonoBehaviour上的所有Invoke调用。
         isDie=true;
         Instantiate(dieEffect);
         PlayerPrefs.SetInt("lastl",MainUIController.Instance.length);//设置key标识的首选项的值。
         PlayerPrefs.SetInt("lasts",MainUIController.Instance.score);
         if(PlayerPrefs.GetInt("bests",0)<MainUIController.Instance.score){
-            PlayerPrefs.SetInt("lastl",MainUIController.Instance.length);
-            PlayerPrefs.SetInt("lasts",MainUIController.Instance.score);
+            PlayerPrefs.SetInt("bestl",MainUIController.Instance.length);
+            PlayerPrefs.SetInt("bests",MainUIController.Instance.score);
         }
         StartCoroutine(GameOver(1.5f));
     }
@@ -127,7 +135,11 @@ public class SnakeHead : MonoBehaviour
             Die();
         }else
         {
-            switch(other.gameObject.name){
+            if(MainUIController.Instance.hasBorder){
+                Die();
+            }else
+            {
+                switch(other.gameObject.name){
                 case "Up":
                     transform .localPosition=new Vector3(transform .localPosition.x,-transform.localPosition.y+30,transform.localPosition.z);
                     break;
@@ -141,6 +153,8 @@ public class SnakeHead : MonoBehaviour
                     transform .localPosition=new Vector3(-transform .localPosition.x+240,transform.localPosition.y,transform.localPosition.z);
                     break;
             }
+            }
+            
         }
 	}
 

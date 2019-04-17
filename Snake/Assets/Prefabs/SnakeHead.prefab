@@ -90,6 +90,9 @@ MonoBehaviour:
   bodyList: []
   velocity: 0.35
   step: 30
+  eatClip: {fileID: 8300000, guid: ed2f178da0347e144b360bd45dd8fed6, type: 3}
+  dieClip: {fileID: 8300000, guid: b973c078365b22e4392753cc963d9970, type: 3}
+  dieEffect: {fileID: 1869509813425396, guid: 059a58b7031b96840ac6bb10f03ccfae, type: 2}
   bodyPrefab: {fileID: 1162396597817248, guid: 5937416b76b9ba744ac8f34a77b0858f, type: 2}
   bodySprites:
   - {fileID: 21300000, guid: 453b92a9f25c44e44b990584cd298796, type: 3}
@@ -113,7 +116,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b40f2806342ef0a4697d33bdfc47f48f, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

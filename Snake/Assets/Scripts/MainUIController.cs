@@ -23,6 +23,7 @@ public class MainUIController : MonoBehaviour {
 	
 	void Awake() {
 		_instance=this;
+		Time.timeScale=1;
 	}
 	private void Start() {
 		if (PlayerPrefs.GetInt("border",1)==0)
